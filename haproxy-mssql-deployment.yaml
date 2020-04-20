@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy-mssql
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: haproxy-mssql
+  template:
+    metadata:
+      labels:
+        app: haproxy-mssql
+    spec:
+      containers:
+      - name: haproxy-mssql
+        image: harbor.registry.domain/repository/haproxy-mssql:1.0.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1433
